@@ -2,8 +2,8 @@
 import {
 	CircleSlashIcon,
 	PlayIcon,
+	RightArrowIcon,
 	SpinnerIcon,
-	UserPlusIcon,
 	Volume2Icon,
 	VolumeXIcon,
 	XIcon,
@@ -84,9 +84,9 @@ const messages = defineMessages({
 		id: 'app.server-sharing-update.skip',
 		defaultMessage: 'Skip',
 	},
-	invite: {
-		id: 'app.server-sharing-update.invite',
-		defaultMessage: 'Invite players',
+	continue: {
+		id: 'app.server-sharing-update.continue',
+		defaultMessage: 'Continue',
 	},
 	watch: {
 		id: 'app.server-sharing-update.watch',
@@ -231,6 +231,7 @@ watch(
 async function invitePlayers() {
 	if (inviting.value) return
 	if (!invitePath.value.endsWith('/play')) {
+		inviteHandoff.awaitingServer.value = true
 		await router.push(invitePath.value)
 		hide()
 		return
@@ -385,8 +386,8 @@ defineExpose({ show, hide, notifyForVersion })
 					</Button>
 					<Button type="colored" color="brand" size="lg" :loading="inviting" @click="invitePlayers">
 						<SpinnerIcon v-if="inviting" class="animate-spin" aria-hidden="true" />
-						<UserPlusIcon v-else aria-hidden="true" />
-						{{ formatMessage(messages.invite) }}
+						<RightArrowIcon v-else aria-hidden="true" />
+						{{ formatMessage(messages.continue) }}
 					</Button>
 				</div>
 			</section>

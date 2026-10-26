@@ -101,8 +101,13 @@ export function useServerPlayMigration(options: {
 
 	async function reinstall(worldId: string) {
 		options.beginInstallation({ type: 'unknown' })
+		const platform = options.content.value?.modpack?.spec.platform
 		try {
-			await client.archon.content_v1.repair(options.serverId, worldId)
+			if (platform === 'modrinth' || platform === 'local_file') {
+				await client.archon.content_v1.restoreClientFiles(options.serverId, worldId)
+			} else {
+				await client.archon.content_v1.repair(options.serverId, worldId)
+			}
 		} catch (error) {
 			options.cancelOptimisticInstallation()
 			throw error
@@ -117,11 +122,19 @@ export function useServerPlayMigration(options: {
 		}
 	}
 
+	async function republish(worldId: string) {
+		const details = await client.archon.servers_v1.get(options.serverId)
+		const shared = details.worlds.find((world) => world.id === worldId)?.content?.shared_instance_id
+		if (shared) await client.archon.content_v1.share(options.serverId, worldId)
+	}
+
 	async function start(next?: ServerPlayMigrationNext) {
 		const worldId = options.worldId.value
 		if (!worldId || step.value !== 'idle') return false
+		const inviteEarly = next === 'invite'
 		try {
 			step.value = 'backup'
+			if (inviteEarly) options.onMigrated(next)
 			await backup(worldId)
 			step.value = 'reinstall'
 			await reinstall(worldId)
@@ -134,7 +147,8 @@ export function useServerPlayMigration(options: {
 				queryKey: ['servers', 'v1', 'detail', options.serverId],
 			})
 			completed.value = true
-			if (next) options.onMigrated(next)
+			if (inviteEarly) await republish(worldId)
+			else if (next) options.onMigrated(next)
 			return true
 		} catch (error) {
 			handleError(error as Error)

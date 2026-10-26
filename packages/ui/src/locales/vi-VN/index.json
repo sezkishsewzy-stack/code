@@ -5849,9 +5849,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "Thiết lập máy chủ (~2 phút)"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "Đang tải lên ({percent, number}%)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "Máy chủ của bạn đã sẵn sàng. Bạn sẽ cần làm những điều này để bắt đầu chơi!"
   },

@@ -5675,9 +5675,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "Sunucunuzu kurun (~2 dakika)"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "Yükleniyor ({percent, number}%)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "Sunucunuz hazır. İşte oynamaya başlamak için yapmanız gerekenler!"
   },

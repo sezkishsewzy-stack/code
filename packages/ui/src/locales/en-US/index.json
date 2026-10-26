@@ -2858,6 +2858,9 @@
   "instance.shared-instance.publish-review.removed-label": {
     "defaultMessage": "Removed"
   },
+  "instance.shared-instance.publish-review.restart-warning": {
+    "defaultMessage": "These changes require a server restart to take effect."
+  },
   "instance.shared-instance.publish-review.storage-over-limit": {
     "defaultMessage": "{size} over the limit. Deselect some files to push this update."
   },
@@ -6507,13 +6510,10 @@
     "defaultMessage": "Backup & reinstall"
   },
   "servers.play-migration.content-locked": {
-    "defaultMessage": "Get your server ready from the Play tab to choose where content is enabled."
+    "defaultMessage": "Share your server on the Play tab to choose where content is enabled."
   },
   "servers.play-migration.description": {
     "defaultMessage": "Since your server’s content was installed before this update, we’ll need to make a few changes to get it ready to share with friends!"
-  },
-  "servers.play-migration.in-progress": {
-    "defaultMessage": "Getting your server ready to share with friends. This may take a few minutes."
   },
   "servers.play-migration.reinstall.custom-description": {
     "defaultMessage": "We’ll reinstall your content and enable it for the server, players, or both based on each project’s environment."
@@ -6529,15 +6529,6 @@
   },
   "servers.play-migration.restart.title": {
     "defaultMessage": "Restart your server"
-  },
-  "servers.play-migration.step.backup": {
-    "defaultMessage": "Backing up your server"
-  },
-  "servers.play-migration.step.reinstall": {
-    "defaultMessage": "Reinstalling your content"
-  },
-  "servers.play-migration.step.restart": {
-    "defaultMessage": "Restarting your server"
   },
   "servers.play-migration.title": {
     "defaultMessage": "Get your server ready"

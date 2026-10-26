@@ -5432,9 +5432,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "Podesi svoj server (~2 minute)"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "Postavljanje ({percent, number}%)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "Tvoj server je gotov! Evo šta treba da uradiš da bi počeo da igraš!"
   },

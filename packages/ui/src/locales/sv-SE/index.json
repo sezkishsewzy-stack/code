@@ -5450,9 +5450,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "Ställ in din server (≈ 2 min)"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "Laddar upp ({percent, number}%)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "Din server är redo. Här är vad du behöver göra för att börja spela!"
   },

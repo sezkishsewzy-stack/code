@@ -104,10 +104,12 @@ function toggle(side: ContentSide) {
 		<button
 			v-for="side in sides"
 			:key="side"
-			v-tooltip="
-				getDisabledTooltip(side) ??
-				formatMessage(side === 'server' ? messages.serverTooltip : messages.playerTooltip)
-			"
+			v-tooltip="{
+				text:
+					getDisabledTooltip(side) ??
+					formatMessage(side === 'server' ? messages.serverTooltip : messages.playerTooltip),
+				class: 'max-w-80 !leading-snug',
+			}"
 			type="button"
 			class="flex h-8 items-center rounded-xl border border-solid px-3 text-sm font-medium transition-[background-color,border-color,color,opacity,transform] duration-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-shadow"
 			:class="[

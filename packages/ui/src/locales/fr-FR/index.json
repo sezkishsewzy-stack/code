@@ -5651,9 +5651,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "Mettez votre serveur en place (~ 2 min)"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "Publication en cours ({percent, number} %)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "Votre serveur est prêt. Voici quoi faire pour commencer la partie !"
   },

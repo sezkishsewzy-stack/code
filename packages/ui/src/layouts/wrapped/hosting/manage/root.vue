@@ -396,6 +396,7 @@ import type { ServerSettingsTabId } from '#ui/layouts/shared/server-settings'
 import {
 	injectModrinthClient,
 	injectNotificationManager,
+	injectServerInviteHandoff,
 	injectServerOnboardingFlow,
 	provideServerPlayMigration,
 	provideServerSettingsModal,
@@ -723,6 +724,22 @@ const canSetup = computed(() =>
 	hasServerPermission(serverData.value?.current_user_permissions ?? 0, 'SETUP'),
 )
 const permissionDeniedMessage = computed(() => formatMessage(commonMessages.noPermissionAction))
+
+const inviteHandoff = injectServerInviteHandoff(null)
+watch(
+	() =>
+		!!inviteHandoff?.awaitingServer.value && !!serverData.value && serverPlayMigration.ready.value,
+	(ready) => {
+		if (!ready || !inviteHandoff) return
+		inviteHandoff.awaitingServer.value = false
+		if (!canSetup.value) return
+		void nextTick(() => {
+			if (serverPlayMigration.required.value) serverPlayMigration.prompt('invite')
+			else serverInviteLinkModal.value?.show()
+		})
+	},
+	{ immediate: true },
+)
 
 function handleBeforeUnload(e: BeforeUnloadEvent) {
 	if (isUploading.value) {

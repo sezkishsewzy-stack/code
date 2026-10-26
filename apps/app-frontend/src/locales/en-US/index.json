@@ -1670,11 +1670,11 @@
   "app.server-sharing-update.blog": {
     "message": "Read more about this release in the <link>server sharing</link> blog."
   },
+  "app.server-sharing-update.continue": {
+    "message": "Continue"
+  },
   "app.server-sharing-update.description": {
     "message": "You can now share your server directly with friends in the app. When they accept, we’ll create an instance for them that is managed by your server."
-  },
-  "app.server-sharing-update.invite": {
-    "message": "Invite players"
   },
   "app.server-sharing-update.mute": {
     "message": "Mute video"

@@ -5642,9 +5642,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "Configura tu servidor (~2mins)"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "Cargando ({percent, number}%)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "Tu servidor está listo. ¡Esto es lo que necesitas hacer para empezar a jugar!"
   },

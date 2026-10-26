@@ -5735,9 +5735,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "Állítsd be a szervered (~2 perc)"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "Feltöltés... ({percent, number}%)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "A szervered készen áll. Íme, mit kell tenned a játék elkezdéséhez!"
   },

@@ -5849,9 +5849,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "Richte deinen Server ein (~2 Min.)"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "Wird hochgeladen ({percent, number}%)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "Dein Server ist startklar. Hier erfährst du, was du tun musst, um zu spielen!"
   },

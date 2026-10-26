@@ -8,7 +8,6 @@ import StackedAdmonitions, {
 } from '#ui/components/base/StackedAdmonitions.vue'
 import CurseForgeFilesReviewModal from '#ui/components/servers/CurseForgeFilesReviewModal.vue'
 import InstallingBanner from '#ui/components/servers/InstallingBanner.vue'
-import { serverPlayMigrationMessages } from '#ui/components/servers/play-migration/messages'
 import { defineMessages, useVIntl } from '#ui/composables/i18n'
 import { useServerBackupsQueue } from '#ui/composables/server-backups-queue'
 import { useServerPermissions } from '#ui/composables/server-permissions'
@@ -16,11 +15,7 @@ import type { FileOperation } from '#ui/layouts/shared/files-tab/types'
 import ServerSharePushModal from '#ui/layouts/shared/server-sharing/components/ServerSharePushModal.vue'
 import { useServerShareReview } from '#ui/layouts/shared/server-sharing/use-server-share-review'
 import { useServerPlayerMembers } from '#ui/layouts/wrapped/hosting/manage/[id]/play/use-server-players'
-import {
-	injectModrinthClient,
-	injectModrinthServerContext,
-	injectServerPlayMigration,
-} from '#ui/providers'
+import { injectModrinthClient, injectModrinthServerContext } from '#ui/providers'
 
 import BackupAdmonition, { type BackupAdmonitionEntry } from './BackupAdmonition.vue'
 import CurseForgeFilesAdmonition from './CurseForgeFilesAdmonition.vue'
@@ -46,7 +41,6 @@ const curseforgeReviewModal =
 	useTemplateRef<InstanceType<typeof CurseForgeFilesReviewModal>>('curseforgeReviewModal')
 const client = injectModrinthClient()
 const ctx = injectModrinthServerContext()
-const serverPlayMigration = injectServerPlayMigration(null)
 const route = useRoute()
 const { canSetup, canManageBackups, canWriteFiles, permissionDeniedMessage } =
 	useServerPermissions()
@@ -86,13 +80,6 @@ const messages = defineMessages({
 		id: 'files.layout.busy-warning',
 		defaultMessage: 'File operations are disabled while the operation is in progress.',
 	},
-})
-
-const playMigrationHeader = computed(() => {
-	const step = serverPlayMigration?.step.value
-	if (step === 'reinstall') return formatMessage(serverPlayMigrationMessages.reinstalling)
-	if (step === 'restart') return formatMessage(serverPlayMigrationMessages.restarting)
-	return formatMessage(serverPlayMigrationMessages.backingUp)
 })
 
 const isOnContentTab = computed(() => route.path.includes('/content'))
@@ -192,7 +179,6 @@ type ServerAdmonitionItem = StackedAdmonitionItem & {
 		| { kind: 'busy-files' }
 		| { kind: 'share-update' }
 		| { kind: 'curseforge-files' }
-		| { kind: 'play-migration' }
 	)
 
 const showInstallingBanner = computed(() => {
@@ -248,17 +234,6 @@ const stackItems = computed<ServerAdmonitionItem[]>(() => {
 			dismissible: failed,
 			kind: 'installing',
 			priority: 0,
-			sortIndex: sortIndex++,
-		})
-	}
-
-	if (serverPlayMigration && serverPlayMigration.step.value !== 'idle') {
-		out.push({
-			id: 'play-migration',
-			type: 'info',
-			dismissible: false,
-			kind: 'play-migration',
-			priority: 1,
 			sortIndex: sortIndex++,
 		})
 	}
@@ -521,13 +496,6 @@ function onInstallationDismiss() {
 				@cancel="onBackupCancel(item.entry)"
 				@retry="onBackupRetry(item.entry)"
 			/>
-			<Admonition
-				v-else-if="item.kind === 'play-migration'"
-				type="info"
-				:header="playMigrationHeader"
-			>
-				{{ formatMessage(serverPlayMigrationMessages.inProgress) }}
-			</Admonition>
 			<Admonition
 				v-else-if="item.kind === 'busy-content'"
 				type="warning"

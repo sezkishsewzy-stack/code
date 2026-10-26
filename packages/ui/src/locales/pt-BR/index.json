@@ -5849,9 +5849,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "Configure seu servidor (cerca de 2 minutos)"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "Enviando ({percent, number}%)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "Seu servidor está pronto. Veja o que você precisa fazer para começar a jogar!"
   },

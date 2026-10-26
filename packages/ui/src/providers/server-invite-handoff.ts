@@ -28,6 +28,8 @@ export interface ServerInviteHandoff {
 	requested: Ref<boolean>
 	binding: ShallowRef<ComputedRef<ServerInviteBinding> | null>
 	migration: ShallowRef<ServerInviteMigrationBinding | null>
+	/** Set when the user still has to pick which server to invite players to. */
+	awaitingServer: Ref<boolean>
 	request: () => void
 	provide: (binding: ComputedRef<ServerInviteBinding>) => void
 	provideMigration: (migration: ServerInviteMigrationBinding) => void
@@ -41,6 +43,7 @@ export function createServerInviteHandoff(): ServerInviteHandoff {
 	const requested = ref(false)
 	const binding = shallowRef<ComputedRef<ServerInviteBinding> | null>(null)
 	const migration = shallowRef<ServerInviteMigrationBinding | null>(null)
+	const awaitingServer = ref(false)
 
 	function request() {
 		binding.value = null
@@ -62,5 +65,14 @@ export function createServerInviteHandoff(): ServerInviteHandoff {
 		migration.value = null
 	}
 
-	return { requested, binding, migration, request, provide, provideMigration, cancel }
+	return {
+		requested,
+		binding,
+		migration,
+		awaitingServer,
+		request,
+		provide,
+		provideMigration,
+		cancel,
+	}
 }

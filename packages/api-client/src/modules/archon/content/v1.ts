@@ -305,6 +305,18 @@ export class ArchonContentV1Module extends AbstractModule {
 		})
 	}
 
+	/** POST /v1/:server_id/worlds/:world_id/content/restore-client-files */
+	public async restoreClientFiles(serverId: string, worldId: string): Promise<void> {
+		await this.client.request<void>(
+			`/servers/${serverId}/worlds/${worldId}/content/restore-client-files`,
+			{
+				api: 'archon',
+				version: 1,
+				method: 'POST',
+			},
+		)
+	}
+
 	/** POST /v1/:server_id/worlds/:world_id/content/unlink-modpack */
 	public async unlinkModpack(serverId: string, worldId: string): Promise<void> {
 		await this.client.request<void>(

@@ -5327,9 +5327,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "サーバーをセットアップする（約2分）"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "アップロード中 ({percent, number}%)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "サーバーの準備が完了しました。プレイを開始する手順は以下の通りです！"
   },

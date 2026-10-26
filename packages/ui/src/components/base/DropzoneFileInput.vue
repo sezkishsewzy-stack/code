@@ -178,7 +178,11 @@ function addLocalFiles(incoming: LocalFile[]) {
 			})
 			return false
 		}
-		return fileIsValid(file, { maxSize: props.maxSize ?? undefined, alertOnInvalid: true }, formatBytes)
+		return fileIsValid(
+			file,
+			{ maxSize: props.maxSize ?? undefined, alertOnInvalid: true },
+			formatBytes,
+		)
 	})
 
 	if (valid.length > 0) {

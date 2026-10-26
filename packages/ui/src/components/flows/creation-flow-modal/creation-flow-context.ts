@@ -273,7 +273,9 @@ export interface CreationFlowContextValue {
 	 * Shows the uploading stage while `run` uploads, returning to the final stage if it fails.
 	 * The caller moves on from the uploading stage once it succeeds.
 	 */
-	trackUpload: <T>(run: (onProgress: (progress: UploadProgress) => void) => Promise<T>) => Promise<T>
+	trackUpload: <T>(
+		run: (onProgress: (progress: UploadProgress) => void) => Promise<T>,
+	) => Promise<T>
 	showInvite: (
 		serverId: string,
 		worldId: string,

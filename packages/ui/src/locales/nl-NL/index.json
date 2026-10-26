@@ -5618,9 +5618,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "Je server instellen (~2 minuten)"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "Aan het uploaden ({percent, number}%)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "Je server staat klaar. Dit is wat je moet doen om te beginnen met spelen!"
   },

@@ -5801,9 +5801,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "Налаштування вашого сервера (~2хв)"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "Вивантаження ({percent, number}%)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "Ваш сервер готовий. Ось що вам потрібно зробити, щоб почати грати!"
   },

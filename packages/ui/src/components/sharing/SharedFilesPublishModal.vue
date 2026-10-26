@@ -68,46 +68,58 @@
 			<SharedFilesStorageMeter
 				:used="selectedSize"
 				:limit="STORAGE_LIMIT_BYTES"
-				class="px-6 py-4"
+				class="px-6 pt-4"
 			/>
 		</div>
 
 		<template #actions>
-			<div class="flex justify-end gap-2 p-2">
-				<Button type="outlined" class="!border" @click="handleCancel">
-					<XIcon />
-					{{ formatMessage(commonMessages.cancelButton) }}
-				</Button>
-				<SplitButton
-					v-if="requiresRestart"
-					type="colored"
-					color="orange"
-					:disabled="confirmDisabled"
-					:primary-disabled="restartDisabled"
-					:options="restartOptions"
-					:menu-label="formatMessage(messages.moreOptions)"
-					@click="handleConfirm(true)"
-				>
-					<RotateCounterClockwiseIcon />
-					{{ restartConfirmLabel ?? formatMessage(messages.pushAndRestartButton) }}
-				</SplitButton>
-				<Button
-					v-else
-					type="colored"
-					color="brand"
-					:disabled="confirmDisabled"
-					@click="handleConfirm(false)"
-				>
-					<UploadIcon />
-					{{ confirmLabel ?? formatMessage(messages.publishButton) }}
-				</Button>
+			<div class="flex flex-col gap-4 p-2">
+				<div v-if="requiresRestart" class="flex flex-row items-start gap-2 text-primary">
+					<CircleAlertIcon class="size-6 shrink-0 text-orange" />
+					<span class="leading-6">{{ formatMessage(messages.restartWarning) }}</span>
+				</div>
+				<div class="flex flex-row justify-end gap-2">
+					<Button type="outlined" class="!border" @click="handleCancel">
+						<XIcon />
+						{{ formatMessage(commonMessages.cancelButton) }}
+					</Button>
+					<SplitButton
+						v-if="requiresRestart"
+						type="colored"
+						color="orange"
+						:disabled="confirmDisabled"
+						:primary-disabled="restartDisabled"
+						:options="restartOptions"
+						:menu-label="formatMessage(messages.moreOptions)"
+						@click="handleConfirm(true)"
+					>
+						<RotateCounterClockwiseIcon />
+						{{ restartConfirmLabel ?? formatMessage(messages.pushAndRestartButton) }}
+					</SplitButton>
+					<Button
+						v-else
+						type="colored"
+						color="brand"
+						:disabled="confirmDisabled"
+						@click="handleConfirm(false)"
+					>
+						<UploadIcon />
+						{{ confirmLabel ?? formatMessage(messages.publishButton) }}
+					</Button>
+				</div>
 			</div>
 		</template>
 	</NewModal>
 </template>
 
 <script setup lang="ts">
-import { RotateCounterClockwiseIcon, SpinnerIcon, UploadIcon, XIcon } from '@modrinth/assets'
+import {
+	CircleAlertIcon,
+	RotateCounterClockwiseIcon,
+	SpinnerIcon,
+	UploadIcon,
+	XIcon,
+} from '@modrinth/assets'
 import { computed, ref } from 'vue'
 
 import Admonition from '#ui/components/base/Admonition.vue'
@@ -292,6 +304,10 @@ const messages = defineMessages({
 	pushOnlyButton: {
 		id: 'instance.shared-instance.publish-review.push-only-button',
 		defaultMessage: 'Push update only',
+	},
+	restartWarning: {
+		id: 'instance.shared-instance.publish-review.restart-warning',
+		defaultMessage: 'These changes require a server restart to take effect.',
 	},
 	moreOptions: {
 		id: 'instance.shared-instance.publish-review.more-options',

@@ -5762,9 +5762,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "Настройте ваш сервер (~2мин)"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "Загружается ({percent, number}%)"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "Ваш сервер готов. Вот что вам нужно сделать до начала игры!"
   },

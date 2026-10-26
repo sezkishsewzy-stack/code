@@ -5849,9 +5849,6 @@
   "servers.setup.onboarding.steps.heading": {
     "defaultMessage": "設定伺服器（約需 2 分鐘）"
   },
-  "servers.setup.onboarding.uploading.progress": {
-    "defaultMessage": "正在上傳 ({percent, number}%}"
-  },
   "servers.setup.onboarding.welcome.description": {
     "defaultMessage": "你的伺服器已準備就緒。以下是開始遊戲前需要完成的操作！"
   },
