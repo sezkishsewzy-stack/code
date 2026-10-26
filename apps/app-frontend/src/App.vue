@@ -34,6 +34,7 @@ import {
 	LoadingBar,
 	NotificationPanel,
 	PopupNotificationPanel,
+	provideIconCache,
 	provideLoadingState,
 	provideModalBehavior,
 	provideModrinthClient,
@@ -157,6 +158,7 @@ import {
 	instanceListQueryOptions,
 	screenshotKeys,
 } from '@/pages/instance/query-options'
+import { createIconCache } from '@/platform/adapters/icon-cache'
 import { createAppClient } from '@/platform/modrinth-client'
 import {
 	appUpdateState,
@@ -283,6 +285,7 @@ useAppEvent('ads_consent_required', handleAdsConsentRequired, appEvents)
 
 const tauriApiClient = createAppClient()
 provideModrinthClient(tauriApiClient)
+provideIconCache(createIconCache())
 const { data: authenticatedModrinthUser } = useQuery({
 	queryKey: computed(() => ['authenticated-user', 'campaigns', credentials.value?.user?.id]),
 	queryFn: () => tauriApiClient.labrinth.users_v3.getAuthenticated(),
