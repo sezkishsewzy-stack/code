@@ -1490,6 +1490,7 @@ pub(super) async fn shared_instance_for_invites(
                     linked_user_id,
                     status: ContentSetSyncStatus::Unknown,
                     applied_version: None,
+                    applied_backtrack_version: None,
                     latest_version: None,
                 },
                 &state.pool,

@@ -263,6 +263,10 @@ pub struct SharedInstanceInstallData {
     pub game_version: String,
     pub loader: ModLoader,
     pub loader_version: Option<String>,
+    #[serde(default)]
+    pub backtrack_version: Option<String>,
+    #[serde(default)]
+    pub fresh_start: bool,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]

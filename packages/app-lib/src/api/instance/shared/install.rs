@@ -266,7 +266,7 @@ async fn get_shared_instance_update_preview_inner(
     let diffs = if update_available {
         let config_files = remote_shared_config_files(
             &attachment.id,
-            attachment.applied_version,
+            config_base_version(&attachment, &version),
             &version,
             &state,
         )
@@ -357,7 +357,9 @@ async fn update_shared_instance_inner(
     let version =
         get_latest_remote_member_version(instance_id, &attachment, &state)
             .await?;
-    let data = shared_instance_install_data(
+    let fresh_start = backtrack_version_changed(&attachment, &version);
+    let applied_version = config_base_version(&attachment, &version);
+    let mut data = shared_instance_install_data(
         &attachment.id,
         attachment.manager_id.clone(),
         attachment.server_manager_name.clone(),
@@ -365,11 +367,33 @@ async fn update_shared_instance_inner(
         None,
         metadata.instance.name,
         version,
-        attachment.applied_version,
+        applied_version,
         &state,
     )
     .await?;
+    data.fresh_start = fresh_start;
     crate::install::update_shared_instance(instance_id.to_string(), data).await
+}
+
+/// Installing another modpack, or another version of it, makes the instance
+/// start over from the shared content published since then.
+fn backtrack_version_changed(
+    attachment: &SharedInstanceAttachment,
+    version: &InstanceVersionResponse,
+) -> bool {
+    attachment.applied_version.is_some()
+        && attachment.applied_backtrack_version != version.backtrack_version
+}
+
+fn config_base_version(
+    attachment: &SharedInstanceAttachment,
+    version: &InstanceVersionResponse,
+) -> Option<i32> {
+    if backtrack_version_changed(attachment, version) {
+        None
+    } else {
+        attachment.applied_version
+    }
 }
 
 pub(super) async fn ensure_ready_remote_version_for_invite(
@@ -687,6 +711,8 @@ pub(super) async fn shared_instance_install_data(
         game_version: version.game_version,
         loader: version.loader,
         loader_version: shared_instance_loader_version(version.loader_version),
+        backtrack_version: version.backtrack_version,
+        fresh_start: false,
     })
 }
 
