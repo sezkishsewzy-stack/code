@@ -19,9 +19,8 @@ const UNSUPPORTED_LOADERS = new Set(['vanilla', 'paper', 'purpur', 'spigot', 'bu
 
 type ReadableRef<T> = Ref<T> | ComputedRef<T>
 
-/** Set `debug-server-play-migration` to `true` in localStorage to treat every server as needing migration outside production. */
+/** Set `debug-server-play-migration` to `true` in localStorage to treat every server as needing migration. */
 function isMigrationForced() {
-	if (process.env.NODE_ENV === 'production') return false
 	try {
 		return localStorage.getItem('debug-server-play-migration') === 'true'
 	} catch {

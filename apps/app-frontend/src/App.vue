@@ -465,6 +465,17 @@ watch([os, isFullscreen], ([osName, fullscreen]) => {
 	document.documentElement.classList.toggle('mac-traffic-lights', osName === 'MacOS' && !fullscreen)
 })
 
+watch(
+	() => appSettings.featureFlags.debug_server_play_migration,
+	(enabled) => {
+		try {
+			if (enabled) localStorage.setItem('debug-server-play-migration', 'true')
+			else localStorage.removeItem('debug-server-play-migration')
+		} catch {}
+	},
+	{ immediate: true },
+)
+
 const authUnreachableDebug = useDebugLogger('AuthReachableChecker')
 const authServerQuery = useQuery({
 	queryKey: ['authServerReachability'],
